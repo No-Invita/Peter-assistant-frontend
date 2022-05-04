@@ -1,0 +1,11 @@
+body{
+    background-image: url(./assets/bg-spider.jpg)
+}
+
+
+.container{
+    margin:auto;
+    padding: auto;
+    text-align:center;
+}
+  
