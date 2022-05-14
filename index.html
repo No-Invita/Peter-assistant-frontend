@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Peter Assistant</title>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <img src="/assets/bg.png" alt="" srcset="" />
-      <!-- Termina la definición del menú -->
-      <div class="row">
-        <!-- Aquí pon las col-x necesarias, comienza tu contenido, etcétera -->
-        <div class="col-12">
-          <h1>Acceder a la ubicación con JavaScript</h1>
-          <br />
-          <strong>Latitud: </strong>
-          <p id="latitud"></p>
-          <br />
-          <strong>Longitud: </strong>
-          <p id="longitud"></p>
-          <br />
-          <iframe
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peter Assistant</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <img src="/assets/bg.png" alt="" srcset="" />
+    <!-- Termina la definición del menú -->
+    <div class="row">
+      <!-- Aquí pon las col-x necesarias, comienza tu contenido, etcétera -->
+      <div class="col-12">
+        <h1>Acceder a la ubicación con JavaScript</h1>
+        <br />
+        <strong>Latitud: </strong>
+        <p id="latitud"></p>
+        <br />
+        <strong>Longitud: </strong>
+        <p id="longitud"></p>
+        <br />
+        <!-- <iframe
             src=""
             id="frame"
             X-frame-Options="DENY"
             frameborder="0"
             scrolling=""
-          ></iframe>
-          <a target="_blank" id="enlace" href="#">Abrir en Google Maps</a>
-        </div>
+          ></iframe> -->
+        <iframe name="iframe_a" height="300px" width="100%" title="Iframe Example"></iframe>
+        <p><a href="/map/localized.html" target="iframe_a">Llevame ahí</a></p>
+        <a target="_blank" id="enlace" href="#">Abrir en Google Maps</a>
       </div>
     </div>
-    <script src="./js/index.js"></script>
-  </body>
+  </div>
+  <script src="./js/index.js"></script>
+</body>
+
 </html>
