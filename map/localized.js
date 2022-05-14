@@ -27,5 +27,5 @@ var control = L.Routing.control(L.extend(window.lrmConfig, {
         ]
     }
 })).addTo(map);
-
+//prueba
 L.Routing.errorControl(control).addTo(map);
