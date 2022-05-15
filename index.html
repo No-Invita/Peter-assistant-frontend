@@ -33,12 +33,17 @@
 					<br />
 					<iframe
 						name="iframe_a"
+						id="frame"
 						height="720px"
 						width="80%"
 						title="Iframe Example"
+						style="display: none"
 					></iframe>
 					<p>
-						<a href="./map/localized.html" target="iframe_a"
+						<a
+							href="./map/localized.html"
+							id="link"
+							target="iframe_a"
 							>Llevame ahí</a
 						>
 					</p>
@@ -48,6 +53,8 @@
 				</div>
 			</div>
 		</div>
+		<script src="./js/speaker.js"></script>
+		<script src="./js/recognizer.js"></script>
 		<script src="./js/getlocation.js"></script>
 		<script src="./js/index.js"></script>
 	</body>

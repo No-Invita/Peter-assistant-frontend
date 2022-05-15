@@ -34,7 +34,6 @@ const funcionInit = () => {
 		})();
 
 		$enlace.href = `https://www.google.com/maps/@${coordenadas.latitude},${coordenadas.longitude},20z`;
-		$frame.src = `https://www.google.com/maps/@${coordenadas.latitude},${coordenadas.longitude},20z`;
 	};
 	const onErrorDeUbicacion = (err) => {
 		$latitud.innerText = "Error obteniendo ubicación: " + err.message;
