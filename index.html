@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,51 +7,32 @@
 		<title>Peter Assistant</title>
 		<link rel="stylesheet" href="./style.css" />
 	</head>
-
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Peter Assistant</title>
-		<link rel="stylesheet" href="./style.css" />
-	</head>
-
 	<body>
 		<div class="container">
-			<img src="./assets/bg.png" alt="" srcset="" />
-			<!-- Termina la definición del menú -->
-			<div class="row">
-				<!-- Aquí pon las col-x necesarias, comienza tu contenido, etcétera -->
-				<div class="col-12">
-					<h1>Acceder a la ubicación con JavaScript</h1>
-					<br />
-					<strong>Latitud: </strong>
-					<p id="latitud"></p>
-					<br />
-					<strong>Longitud: </strong>
-					<p id="longitud"></p>
-					<br />
-					<iframe
-						name="iframe_a"
-						id="frame"
-						height="720px"
-						width="80%"
-						title="Iframe Example"
-						style="display: none"
-					></iframe>
-					<p>
-						<a
-							href="./map/localized.html"
-							id="link"
-							target="iframe_a"
-							>Llevame ahí</a
-						>
-					</p>
-					<a target="_blank" id="enlace" href="#"
-						>Abrir en Google Maps</a
-					>
-				</div>
-			</div>
+			<img src="./assets/bg.png" id="peter" alt="" srcset="" />
+			<h1>Peter Assistant</h1>
+			<br />
+			<p">para iniciar el programa da click sobre peter</p>
+			<strong>Latitud: </strong>
+			<p id="latitud"></p>
+			<br />
+			<strong>Longitud: </strong>
+			<p id="longitud"></p>
+			<br />
+			<iframe
+				name="iframe_a"
+				id="frame"
+				height="720px"
+				width="80%"
+				title="Iframe Example"
+				style="display: none"
+			></iframe>
+			<p>
+				<a href="./map/localized.html" id="link" target="iframe_a"
+					>Llevame ahí</a
+				>
+			</p>
+			<a target="_blank" id="enlace" href="#">Abrir en Google Maps</a>
 		</div>
 		<script src="./js/speaker.js"></script>
 		<script src="./js/recognizer.js"></script>
