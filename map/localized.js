@@ -6,7 +6,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 const getcord = async function get() {
-	const req = await fetch(`http://localhost:5000/location`);
+	const req = await fetch(`https://peter-assistant.herokuapp.com/location`);
 	const res = await req.json();
 	console.log(res.location);
 	let cord = res.location;

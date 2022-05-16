@@ -16,18 +16,21 @@ const funcionInit = () => {
 		$latitud.innerText = coordenadas.latitude;
 		$longitud.innerText = coordenadas.longitude;
 		(async () => {
-			const rawResponse = await fetch("http://localhost:5000/location", {
-				method: "POST",
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json",
-					mode: "no-cors",
-				},
-				body: JSON.stringify({
-					latitude: coordenadas.latitude,
-					longitude: coordenadas.longitude,
-				}),
-			});
+			const rawResponse = await fetch(
+				"https://peter-assistant.herokuapp.com/location",
+				{
+					method: "POST",
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json",
+						mode: "no-cors",
+					},
+					body: JSON.stringify({
+						latitude: coordenadas.latitude,
+						longitude: coordenadas.longitude,
+					}),
+				}
+			);
 			const content = await rawResponse.json();
 
 			console.log(content);
@@ -44,7 +47,7 @@ const funcionInit = () => {
 	const opcionesDeSolicitud = {
 		enableHighAccuracy: true, // Alta precisión
 		maximumAge: 0, // No queremos caché
-		timeout: 1000, // Esperar solo 5 segundos
+		timeout: 5000, // Esperar solo 5 segundos
 	};
 
 	$latitud.innerText = "Cargando...";
@@ -54,4 +57,5 @@ const funcionInit = () => {
 		onErrorDeUbicacion,
 		opcionesDeSolicitud
 	);
+	speak("para iniciar el programa da click sobre Peter");
 };
