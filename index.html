@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Peter Assistant</title>
 		<link rel="stylesheet" href="./style.css" />
+		<script src="./js/speaker.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -13,6 +14,7 @@
 			<h1>Peter Assistant</h1>
 			<br />
 			<p">para iniciar el programa da click sobre peter</p>
+			<div class="clases" style="display:none;"></div>
 			<strong>Latitud: </strong>
 			<p id="latitud"></p>
 			<br />
@@ -34,9 +36,10 @@
 			</p>
 			<a target="_blank" id="enlace" href="#">Abrir en Google Maps</a>
 		</div>
-		<script src="./js/speaker.js"></script>
+		<script src="./js/getclasses.js"></script>
 		<script src="./js/recognizer.js"></script>
 		<script src="./js/getlocation.js"></script>
 		<script src="./js/index.js"></script>
+		<script src="./js/renderclasses.js"></script>
 	</body>
 </html>
