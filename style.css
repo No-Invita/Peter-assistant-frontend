@@ -1,12 +1,39 @@
 body{
-    background-image: url(./assets/bg-spider.jpg)
+    /* background-image: url(./assets/bg-spider.jpg) */
+    background-image: url(https://i.pinimg.com/564x/e2/aa/d2/e2aad2ec29b27db4c51fe87dee99899b.jpg)
 }
 
 
 .container{
     margin:auto;
     padding: auto;
-    color:white;
+    color:rgb(60, 24, 221);
     text-align:center;
+}
+
+h1{
+	font-size:50px;
+	text-align:center;
+	color:#fff; 	
+}
+
+details{
+	font-size:20px;
+	text-align:center;
+	display: inline;
+	margin: 1rem;
+	width: 400px;
+	background-color: aliceblue;
+	background-image: url('https://i.pinimg.com/236x/2b/a1/6d/2ba16dd0250d7fc477aeb99899a298d8.jpg');
+	color: white;
+}
+
+a{
+	text-decoration:none;
+	color:rgb(236, 235, 243);
+}
+
+a:hover{
+	color:rgb(60, 24, 221);
 }
   
