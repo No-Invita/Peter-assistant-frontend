@@ -18,4 +18,20 @@ recognition.onresult = function (event) {
 	console.log(event.results[0][0].transcript);
 	texto = event.results[0][0].transcript;
 	console.log("Confidence: " + event.results[0][0].confidence);
+	if (texto.includes("quiero")) {
+		console.log("estas son tus clases");
+		getclasses();
+	} else {
+		console.log("first");
+	}
+};
+
+recognition.onstart = function (event) {
+	console.log("Listo para escuchar");
+};
+
+recognition.onerror = function (event) {
+	console.log(event);
+	console.log("Error: " + event.error);
+	console.log("Additional information: " + event.message);
 };

@@ -4,4 +4,3 @@ async function getclasses() {
 	console.log(res);
 	renderClasses(res);
 }
-getclasses();

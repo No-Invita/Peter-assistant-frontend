@@ -6,15 +6,15 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 const getcord = async function get() {
-	const req = await fetch(`https://peter-assistant.herokuapp.com/location`);
+	const req = await fetch("https://peter-assistant.herokuapp.com/location");
 	const res = await req.json();
-	console.log(res.location);
-	let cord = res.location;
+	const cord = res.location;
+	const bloque = res.destination;
 	var control = L.Routing.control(
 		L.extend(window.lrmConfig, {
 			waypoints: [
 				L.latLng(cord.latitude, cord.longitude), // Here go the current location
-				L.latLng(11.0209, -74.85179), // Here go the destiny location
+				L.latLng(bloque.latitude, bloque.longitude), // Here go the destiny location
 			],
 			router: L.Routing.graphHopper(
 				"ef80e7e7-23d7-470c-8cef-c42f10a83d58",

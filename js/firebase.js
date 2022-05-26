@@ -57,9 +57,30 @@ $login.addEventListener("click", () => {
 			// This gives you a Google Access Token. You can use it to access the Google API.
 			const credential = GoogleAuthProvider.credentialFromResult(result);
 			const token = credential.accessToken;
+			console.log(credential);
 			// The signed-in user info.
 			const user = result.user;
 			console.log(user);
+			(async () => {
+				const rawResponse = await fetch("http://localhost:5000/login", {
+					method: "POST",
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json",
+						mode: "no-cors",
+					},
+					body: JSON.stringify({
+						token: token,
+						uid: user.uid,
+						token_expiry: user.stsTokenManager.expirationTime,
+						refresh_token: user.stsTokenManager.refreshToken,
+						credential: credential,
+					}),
+				});
+				const content = await rawResponse.json();
+
+				console.log(content);
+			})();
 			// ...
 		})
 		.catch((error) => {

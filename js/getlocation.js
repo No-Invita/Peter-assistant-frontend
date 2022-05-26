@@ -5,16 +5,12 @@ const funcionInit = () => {
 		);
 	}
 
-	const $latitud = document.querySelector("#latitud"),
-		$longitud = document.querySelector("#longitud"),
-		$enlace = document.querySelector("#enlace");
+	const $enlace = document.querySelector("#enlace");
 	$frame = document.querySelector("#frame");
 
 	const onUbicacionConcedida = (ubicacion) => {
 		console.log("Tengo la ubicación: ", ubicacion);
 		const coordenadas = ubicacion.coords;
-		$latitud.innerText = coordenadas.latitude;
-		$longitud.innerText = coordenadas.longitude;
 		(async () => {
 			const rawResponse = await fetch(
 				"https://peter-assistant.herokuapp.com/location",
@@ -39,8 +35,6 @@ const funcionInit = () => {
 		$enlace.href = `https://www.google.com/maps/@${coordenadas.latitude},${coordenadas.longitude},20z`;
 	};
 	const onErrorDeUbicacion = (err) => {
-		$latitud.innerText = "Error obteniendo ubicación: " + err.message;
-		$longitud.innerText = "Error obteniendo ubicación: " + err.message;
 		console.log("Error obteniendo ubicación: ", err);
 	};
 
@@ -50,8 +44,6 @@ const funcionInit = () => {
 		timeout: 5000, // Esperar solo 5 segundos
 	};
 
-	$latitud.innerText = "Cargando...";
-	$longitud.innerText = "Cargando...";
 	navigator.geolocation.getCurrentPosition(
 		onUbicacionConcedida,
 		onErrorDeUbicacion,
