@@ -1,5 +1,6 @@
 const render = (clase, parent) => {
 	const docclass = document.createElement("details");
+	docclass.open = true;
 
 	docclass.innerHTML = `
 	<summary>${clase.summary}</summary>
