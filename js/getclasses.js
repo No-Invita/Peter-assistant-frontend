@@ -5,4 +5,4 @@ async function getclasses() {
 	renderClasses(res);
 }
 
-getclasses();
+// getclasses();
