@@ -50,5 +50,5 @@ const funcionInit = () => {
 		opcionesDeSolicitud
 	);
 	speak("para iniciar el programa da click sobre Peter");
-	alert("para iniciar el programa da click sobre Peter");
+	alert("Para iniciar el programa da click sobre Peter");
 };
