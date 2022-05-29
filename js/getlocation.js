@@ -32,7 +32,7 @@ const funcionInit = () => {
 			console.log(content);
 		})();
 
-		$enlace.href = `https://www.google.com/maps/@${coordenadas.latitude},${coordenadas.longitude},20z`;
+		// $enlace.href = `https://www.google.com/maps/@${coordenadas.latitude},${coordenadas.longitude},20z`;
 	};
 	const onErrorDeUbicacion = (err) => {
 		console.log("Error obteniendo ubicación: ", err);
@@ -49,6 +49,6 @@ const funcionInit = () => {
 		onErrorDeUbicacion,
 		opcionesDeSolicitud
 	);
-	speak("para iniciar el programa da click sobre Peter");
+	// speak("para iniciar el programa da click sobre Peter");
 	alert("Para iniciar el programa da click sobre Peter");
 };

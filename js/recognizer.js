@@ -20,7 +20,8 @@ recognition.onresult = function (event) {
 	console.log("Confidence: " + event.results[0][0].confidence);
 	if (texto.includes("quiero")) {
 		console.log("estas son tus clases");
-		getclasses();
+		// getclasses();
+		handleAuthClick();
 	} else {
 		console.log("first");
 	}

@@ -1,96 +1,134 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
-import {
-	getAuth,
-	GoogleAuthProvider,
-	signInWithRedirect,
-	getRedirectResult,
-	signInWithPopup,
-} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-auth.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// TODO(developer): Set to client ID and API key from the Developer Console
+const CLIENT_ID =
+	"210376532190-j5kv75rb4f3h3ulir579n1g4p8u7d1ii.apps.googleusercontent.com";
+const API_KEY = "AIzaSyCiAeD2e9sOcLtg7mae_dvIh9LbinfZZ8I";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-	apiKey: "AIzaSyCiAeD2e9sOcLtg7mae_dvIh9LbinfZZ8I",
-	authDomain: "elite-avatar-344815.firebaseapp.com",
-	projectId: "elite-avatar-344815",
-	storageBucket: "elite-avatar-344815.appspot.com",
-	messagingSenderId: "210376532190",
-	appId: "1:210376532190:web:626a262eff49478d28a24f",
-	measurementId: "G-XBE6L1DD9W",
-};
+// Discovery doc URL for APIs used by the quickstart
+const DISCOVERY_DOC =
+	"https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest";
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Authorization scopes required by the API; multiple scopes can be
+// included, separated by spaces.
+const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider(app);
+let tokenClient;
+let gapiInited = false;
+let gisInited = false;
 
-const $login = document.querySelector("#login");
-$login.addEventListener("click", () => {
-	// signInWithRedirect(auth, provider);
+/**
+ * Callback after api.js is loaded.
+ */
+function gapiLoaded() {
+	gapi.load("client", intializeGapiClient);
+}
 
-	// getRedirectResult(auth)
-	// 	.then((result) => {
-	// 		// This gives you a Google Access Token. You can use it to access Google APIs.
-	// 		const credential = GoogleAuthProvider.credentialFromResult(result);
-	// 		const token = credential.accessToken;
+/**
+ * Callback after the API client is loaded. Loads the
+ * discovery doc to initialize the API.
+ */
+async function intializeGapiClient() {
+	await gapi.client.init({
+		apiKey: API_KEY,
+		discoveryDocs: [DISCOVERY_DOC],
+	});
+	gapiInited = true;
+}
 
-	// 		// The signed-in user info.
-	// 		const user = result.user;
-	// 		console.log(user);
-	// 	})
-	// 	.catch((error) => {
-	// 		// Handle Errors here.
-	// 		const errorCode = error.code;
-	// 		const errorMessage = error.message;
-	// 		// The email of the user's account used.
-	// 		const email = error.email;
-	// 		// The AuthCredential type that was used.
-	// 		const credential = GoogleAuthProvider.credentialFromError(error);
-	// 		// ...
-	// 	});
-	signInWithPopup(auth, provider)
-		.then((result) => {
-			// This gives you a Google Access Token. You can use it to access the Google API.
-			const credential = GoogleAuthProvider.credentialFromResult(result);
-			const token = credential.accessToken;
-			console.log(credential);
-			// The signed-in user info.
-			const user = result.user;
-			console.log(user);
-			(async () => {
-				const rawResponse = await fetch("http://localhost:5000/login", {
-					method: "POST",
-					headers: {
-						Accept: "application/json",
-						"Content-Type": "application/json",
-						mode: "no-cors",
-					},
-					body: JSON.stringify({
-						token: token,
-						uid: user.uid,
-						token_expiry: user.stsTokenManager.expirationTime,
-						refresh_token: user.stsTokenManager.refreshToken,
-						credential: credential,
-					}),
-				});
-				const content = await rawResponse.json();
+/**
+ * Callback after Google Identity Services are loaded.
+ */
+function gisLoaded() {
+	tokenClient = google.accounts.oauth2.initTokenClient({
+		client_id: CLIENT_ID,
+		scope: SCOPES,
+		callback: "", // defined later
+	});
+	gisInited = true;
+}
 
-				console.log(content);
-			})();
-			// ...
-		})
-		.catch((error) => {
-			// Handle Errors here.
-			const errorCode = error.code;
-			const errorMessage = error.message;
-			// The email of the user's account used.
-			const email = error.email;
-			// The AuthCredential type that was used.
-			const credential = GoogleAuthProvider.credentialFromError(error);
-			// ...
+/**
+ *  Sign in the user upon button click.
+ */
+function handleAuthClick() {
+	tokenClient.callback = async (resp) => {
+		if (resp.error !== undefined) {
+			throw resp;
+		}
+		await listUpcomingEvents();
+	};
+
+	if (gapi.client.getToken() === null) {
+		// Prompt the user to select a Google Account and ask for consent to share their data
+		// when establishing a new session.
+		tokenClient.requestAccessToken({ prompt: "consent" });
+	} else {
+		// Skip display of account chooser and consent dialog for an existing session.
+		tokenClient.requestAccessToken({ prompt: "" });
+	}
+}
+
+/**
+ *  Sign out the user upon button click.
+ */
+function handleSignoutClick() {
+	const token = gapi.client.getToken();
+	if (token !== null) {
+		google.accounts.oauth2.revoke(token.access_token);
+		gapi.client.setToken("");
+	}
+}
+
+/**
+ * Print the summary and start datetime/date of the next ten events in
+ * the authorized user's calendar. If no events are found an
+ * appropriate message is printed.
+ */
+async function listUpcomingEvents() {
+	let response;
+	try {
+		const request = {
+			calendarId: "primary",
+			timeMin: new Date().toISOString(),
+			showDeleted: false,
+			singleEvents: true,
+			maxResults: 10,
+			orderBy: "startTime",
+		};
+		response = await gapi.client.calendar.events.list(request);
+	} catch (err) {
+		document.getElementById("content").innerText = err.message;
+		return;
+	}
+
+	const events = response.result.items;
+	if (!events || events.length == 0) {
+		document.getElementById("content").innerText = "No events found.";
+		return;
+	}
+	console.log(events);
+	(async () => {
+		const req = await fetch("https://peter-assistant.herokuapp.com/event", {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				mode: "no-cors",
+			},
+			body: JSON.stringify({
+				events: events,
+			}),
 		});
-});
+		const response = await req.json();
+		console.log(response);
+		renderClasses(response);
+	})();
+	// Flatten to string to display
+	const output = events.reduce(
+		(str, event) =>
+			`${str}${event.summary} (${
+				event.start.dateTime || event.start.date
+			})\n`,
+		"Events:\n"
+	);
+	document.getElementById("content").innerText = output;
+}
