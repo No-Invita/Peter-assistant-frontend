@@ -96,15 +96,12 @@ async function listUpcomingEvents() {
 		};
 		response = await gapi.client.calendar.events.list(request);
 	} catch (err) {
-		document.getElementById("content").innerText = err.message;
+		alert(err.message);
 		return;
 	}
 
+	saveID();
 	const events = response.result.items;
-	if (!events || events.length == 0) {
-		document.getElementById("content").innerText = "No events found.";
-		return;
-	}
 	console.log(events);
 	(async () => {
 		const req = await fetch("https://peter-assistant.herokuapp.com/event", {
@@ -119,16 +116,15 @@ async function listUpcomingEvents() {
 			}),
 		});
 		const response = await req.json();
-		console.log(response);
 		renderClasses(response);
 	})();
-	// Flatten to string to display
-	const output = events.reduce(
-		(str, event) =>
-			`${str}${event.summary} (${
-				event.start.dateTime || event.start.date
-			})\n`,
-		"Events:\n"
-	);
-	document.getElementById("content").innerText = output;
+
+	function saveID() {
+		const mail = document.createElement("div");
+		mail.id = "mail";
+		mail.style.display = "none";
+		mail.innerHTML = response.result.summary.split("@")[0];
+		localStorage.setItem("id", response.result.summary.split("@")[0]);
+		document.body.appendChild(mail);
+	}
 }
