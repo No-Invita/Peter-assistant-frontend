@@ -1,4 +1,5 @@
 const getBlock = async (block, clase) => {
+	const id = document.getElementById("mail").innerHTML;
 	const req = await fetch(
 		"https://peter-assistant.herokuapp.com/destination",
 		{
@@ -10,6 +11,7 @@ const getBlock = async (block, clase) => {
 			},
 			body: JSON.stringify({
 				destination: block,
+				id: id,
 			}),
 		}
 	);
