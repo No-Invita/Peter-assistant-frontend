@@ -5,10 +5,13 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 		'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-const getcord = async function get() {
-	const req = await fetch("https://peter-assistant.herokuapp.com/location");
+const getcord = async (local) => {
+	var identifier = localStorage.getItem("id");
+	const req = await fetch(
+		"https://peter-assistant.herokuapp.com/location?id=" + identifier
+	);
 	const res = await req.json();
-	const cord = res.location;
+	const cord = local;
 	const bloque = res.destination;
 	var control = L.Routing.control(
 		L.extend(window.lrmConfig, {
@@ -41,5 +44,3 @@ const getcord = async function get() {
 	//prueba
 	L.Routing.errorControl(control).addTo(map);
 };
-
-getcord();
