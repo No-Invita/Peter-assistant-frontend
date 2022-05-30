@@ -20,15 +20,20 @@ recognition.onresult = function (event) {
 	console.log("Confidence: " + event.results[0][0].confidence);
 	if (texto.includes("quiero")) {
 		console.log("estas son tus clases");
+		speak("Inicia sesion para obtener tus clases");
 		// getclasses();
 		handleAuthClick();
 	} else {
 		console.log("first");
+		document.getElementById("title").innerText =
+			"Disculpa no te he entendido";
+		speak("Disculpa no te he entendido");
 	}
 };
 
 recognition.onstart = function (event) {
 	console.log("Listo para escuchar");
+	document.getElementById("title").innerText = "Listo para escuchar";
 };
 
 recognition.onerror = function (event) {

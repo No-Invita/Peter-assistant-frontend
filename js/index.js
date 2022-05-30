@@ -7,6 +7,7 @@ peter.addEventListener("click", function () {
 document.addEventListener("DOMContentLoaded", function () {
 	// funcionInit();
 	// speak("Hola, ¿Qué tal?, ¿Quieres saber cual es tu proxima clase?");
+	alert("Para iniciar el programa da clik sobre Peter");
 });
 
 const displayframe = () => {

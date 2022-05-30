@@ -4,9 +4,10 @@ const render = (clase, parent) => {
 
 	docclass.innerHTML = `
 	<summary>${clase.summary}</summary>
-	<p>${clase.description}\n
-	${clase.start} \t ${clase.end} en ${clase.location}\n
+	<p>${clase.description}\n</p>
 	<p>
+	${clase.start} \t ${clase.end} en ${clase.location}\n
+	</p>
 	<a href="./map/localized.html"  class="link" target="iframe_a"
 		>Llevame ahí</a
 	>
@@ -24,6 +25,8 @@ const render = (clase, parent) => {
 };
 
 const renderClasses = (clases) => {
+	document.getElementById("title").innerText = "Estas son tus clases";
+	speak("Estas son tus clases");
 	const div = document.createElement("div");
 	for (const clase of clases) {
 		render(clase, div);
