@@ -46,3 +46,9 @@ recognition.onerror = function (event) {
 	console.log("Error: " + event.error);
 	console.log("Additional information: " + event.message);
 };
+
+recognition.onspeechend = function () {
+	recognition.stop();
+	document.getElementById("title").innerText =
+		"Speech recognition has stopped.";
+};
