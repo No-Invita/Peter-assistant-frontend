@@ -86,12 +86,18 @@ function handleSignoutClick() {
 async function listUpcomingEvents() {
 	let response;
 	try {
+		let date = new Date().toISOString().split("T")[0] + "T05:00:00Z";
+		mañana =
+			new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+				.toISOString()
+				.split("T")[0] + "T05:00:00Z";
 		const request = {
 			calendarId: "primary",
-			timeMin: new Date().toISOString(),
+			timeMin: date,
+			timeMax: mañana,
 			showDeleted: false,
 			singleEvents: true,
-			maxResults: 10,
+			// maxResults: 10,
 			orderBy: "startTime",
 		};
 		response = await gapi.client.calendar.events.list(request);
