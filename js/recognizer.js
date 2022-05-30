@@ -26,8 +26,9 @@ recognition.onresult = function (event) {
 	} else {
 		console.log("first");
 		document.getElementById("title").innerText =
-			"Disculpa no te he entendido";
-		speak("Disculpa no te he entendido");
+			"Disculpa no te he entendido intenta de nuevo";
+		speak("Disculpa no te he entendido intenta de nuevo");
+		recognition.start();
 	}
 };
 
