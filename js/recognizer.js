@@ -18,7 +18,12 @@ recognition.onresult = function (event) {
 	console.log(event.results[0][0].transcript);
 	texto = event.results[0][0].transcript;
 	console.log("Confidence: " + event.results[0][0].confidence);
-	if (texto.includes("quiero")) {
+	if (
+		texto.includes("quiero") ||
+		texto.includes("quiero saber") ||
+		texto.includes("si") ||
+		texto.includes("sí")
+	) {
 		console.log("estas son tus clases");
 		speak("Inicia sesion para obtener tus clases");
 		// getclasses();
@@ -28,7 +33,6 @@ recognition.onresult = function (event) {
 		document.getElementById("title").innerText =
 			"Disculpa no te he entendido intenta de nuevo";
 		speak("Disculpa no te he entendido intenta de nuevo");
-		recognition.start();
 	}
 };
 
