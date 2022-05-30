@@ -105,6 +105,7 @@ async function listUpcomingEvents() {
 	console.log(events);
 	(async () => {
 		const req = await fetch("https://peter-assistant.herokuapp.com/event", {
+			// const req = await fetch("http://localhost:5000/event", {
 			method: "POST",
 			headers: {
 				Accept: "application/json",

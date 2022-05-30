@@ -9,6 +9,7 @@ const getcord = async (local) => {
 	var identifier = localStorage.getItem("id");
 	const req = await fetch(
 		"https://peter-assistant.herokuapp.com/location?id=" + identifier
+		// "http://localhost:5000/location?id=" + identifier
 	);
 	const res = await req.json();
 	const cord = local;
