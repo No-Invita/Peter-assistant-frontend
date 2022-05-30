@@ -8,5 +8,6 @@ const getBlock = async (block, clase) => {
 		// "http://localhost:5000/destination?id=" + id + "&destination=" + block
 	);
 	const response = await req.json();
+	speak(response.message);
 	console.log(response);
 };
