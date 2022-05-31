@@ -109,23 +109,40 @@ async function listUpcomingEvents() {
 	saveID();
 	const events = response.result.items;
 	console.log(events);
-	(async () => {
-		const req = await fetch("https://peter-assistant.herokuapp.com/event", {
-			// const req = await fetch("http://localhost:5000/event", {
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				mode: "no-cors",
-			},
-			body: JSON.stringify({
-				events: events,
-			}),
-		});
-		const response = await req.json();
-		renderClasses(response);
-	})();
-
+	if (events.length == 0) {
+		document.getElementById("title").innerText = "no tienes clase";
+		speak("no tienes clase");
+	} else {
+		for (const i of events) {
+			if (!i.description) {
+				i.description = "NA";
+			}
+		}
+		(async () => {
+			const req = await fetch(
+				"https://peter-assistant.herokuapp.com/event",
+				{
+					// const req = await fetch("http://localhost:5000/event", {
+					method: "POST",
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json",
+						mode: "no-cors",
+					},
+					body: JSON.stringify({
+						events: events,
+					}),
+				}
+			);
+			const response = await req.json();
+			if (response.length == 0) {
+				document.getElementById("title").innerText = "no tienes clase";
+				speak("no tienes clase");
+			} else {
+				renderClasses(response);
+			}
+		})();
+	}
 	function saveID() {
 		const mail = document.createElement("div");
 		mail.id = "mail";
