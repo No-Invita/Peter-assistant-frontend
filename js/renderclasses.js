@@ -6,7 +6,7 @@ const render = (clase, parent) => {
 	<summary>${clase.summary}</summary>
 	<p>${clase.description}\n</p>
 	<p>
-	${clase.start} \t ${clase.end} en ${clase.location}\n
+	${clase.start} a  ${clase.end} en ${clase.location}\n
 	</p>
 	<a href="./map/localized.html"  class="link" target="iframe_a"
 		>Llevame ahí</a

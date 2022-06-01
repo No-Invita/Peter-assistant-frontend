@@ -113,7 +113,7 @@ async function listUpcomingEvents() {
 	const events = response.result.items;
 	console.log(events);
 	if (events.length == 0) {
-		document.getElementById("title").innerText = "No tienes evento";
+		document.getElementById("title").innerText = "No tienes eventos";
 		speak("No tienes eventos");
 	} else {
 		for (const i of events) {

@@ -2,6 +2,10 @@ body {
 	/* background-image: url(./assets/bg-spider.jpg) */
 	/* background-image: url(https://i.pinimg.com/564x/e2/aa/d2/e2aad2ec29b27db4c51fe87dee99899b.jpg) */
 	background-color: #0e2c48;
+	-webkit-text-stroke: 0.5px black;
+	color: white;
+	text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+		-1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 nav {
@@ -67,11 +71,11 @@ details h1 {
 
 a {
 	text-decoration: none;
-	color: rgb(236, 235, 243);
+	color: rgb(34, 2, 240);
 }
 
 a:hover {
-	color: rgb(60, 24, 221);
+	color: rgb(35, 3, 174);
 }
 
 ul {
