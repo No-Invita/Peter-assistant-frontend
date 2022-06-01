@@ -1,7 +1,11 @@
 var synth = window.speechSynthesis;
 
 var voices = [];
-
+/**
+ * speaks the text
+ * @param {*} x
+ * @returns
+ */
 const speak = (x = " hola que tal") => {
 	if (synth.speaking) {
 		console.error("speechSynthesis.speaking");
@@ -25,7 +29,11 @@ const speak = (x = " hola que tal") => {
 	console.log(synth);
 	synth.speak(utterThis);
 };
-
+/**
+ * speaks the text and listens for the user to say it
+ * @param {*} x
+ * @returns
+ */
 const speakAndListen = (x = " hola que tal") => {
 	if (synth.speaking) {
 		console.error("speechSynthesis.speaking");

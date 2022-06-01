@@ -1,3 +1,8 @@
+/**
+ * renders an individual class
+ * @param {*} clase
+ */
+
 const render = (clase, parent) => {
 	const docclass = document.createElement("details");
 	docclass.open = true;
@@ -24,6 +29,10 @@ const render = (clase, parent) => {
 	parent.appendChild(li);
 };
 
+/**
+ * renders all classes
+ * @param {*} clases
+ */
 const renderClasses = (clases) => {
 	document.getElementById("title").innerText = "Estas son tus clases";
 	speak("Estas son tus clases");

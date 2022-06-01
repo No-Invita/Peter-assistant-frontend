@@ -1,3 +1,8 @@
+/**
+ * makes a request to the server in order to get the block info
+ * @param {*} block
+ * @param {*} clase
+ */
 const getBlock = async (block, clase) => {
 	const id = document.getElementById("mail").innerHTML;
 	const req = await fetch(
