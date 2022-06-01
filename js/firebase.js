@@ -86,11 +86,14 @@ function handleSignoutClick() {
 async function listUpcomingEvents() {
 	let response;
 	try {
-		let date = new Date().toISOString().split("T")[0] + "T05:00:00Z";
+		let today = new Date(new Date().getTime() - 5 * 60 * 60 * 1000);
+		let date = today.toISOString().split("T")[0] + "T05:00:00Z";
 		mañana =
-			new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+			new Date(today.getTime() + 24 * 60 * 60 * 1000)
 				.toISOString()
 				.split("T")[0] + "T05:00:00Z";
+		console.log({ date });
+		console.log({ mañana });
 		const request = {
 			calendarId: "primary",
 			timeMin: date,
@@ -110,8 +113,8 @@ async function listUpcomingEvents() {
 	const events = response.result.items;
 	console.log(events);
 	if (events.length == 0) {
-		document.getElementById("title").innerText = "no tienes clase";
-		speak("no tienes clase");
+		document.getElementById("title").innerText = "No tienes evento";
+		speak("No tienes eventos");
 	} else {
 		for (const i of events) {
 			if (!i.description) {
@@ -136,8 +139,9 @@ async function listUpcomingEvents() {
 			);
 			const response = await req.json();
 			if (response.length == 0) {
-				document.getElementById("title").innerText = "no tienes clase";
-				speak("no tienes clase");
+				document.getElementById("title").innerText =
+					"No tienes eventos";
+				speak("No tienes eventos");
 			} else {
 				renderClasses(response);
 			}
